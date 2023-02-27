@@ -49,11 +49,10 @@ const questions = [
       "Angular",
       "Vue.js",
       "Bootstrap",
-      "Materialize",
+      "Tailwind CSS",
       "jQuery",
-      "Express",
+      "Express.js",
       "MongoDB",
-      "PostgreSQL",
       "MySQL",
     ],
     validate: function (checkbox) {
@@ -94,10 +93,10 @@ const questions = [
     message: "Choose the license for your project:",
     choices: [
       "MIT",
-      "Apache-2.0",
-      "GPL-3.0",
-      "BSD-3-Clause",
-      "BSD-2-Clause",
+      "Apache 2.0",
+      "GNU GPL v3",
+      "BSD 3-Clause",
+      "BSD 2-Clause",
       "The Unlicense",
       "None",
     ],
@@ -141,7 +140,7 @@ const questions = [
 ];
 
 // function to write README file
-function writeToFile(fileName, answer) {
+function writeToFile(fileName, data) {
   fs.writeFile(fileName, generateMarkdown(data), function (err) {
     if (err) {
       return console.log(err);
@@ -159,6 +158,7 @@ function init() {
     "\n"
   );
   inquirer.prompt(questions).then((answers) => {
+    writeToFile("./Generated-file/README.md", generateMarkdown({ ...answers }));
     console.log(
       "\n",
       "------------- Your README has been Successfully Generated! -------------",
@@ -166,8 +166,11 @@ function init() {
       "- To view your generated README.md file, please navigate to the Generated file directory.",
       "\n",
       "Below are your results",
+      "\n",
       answers
+      
     );
+
   });
 }
 
