@@ -6,7 +6,7 @@ Creating a good README file is important as it provides critical information abo
 
 ### Preview
 
-![App demo](./Images/Readme-Test.gif)
+Please [Click Here](https://youtu.be/cT-fPHC6reg) to watch the Demo for the generated README file below.
 
 ![App Screenshot](./Images/generated-readme-file.png)
 
