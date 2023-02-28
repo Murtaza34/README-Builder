@@ -6,6 +6,10 @@ Creating a good README file is important as it provides critical information abo
 
 ### Preview
 
+
+
+![App Screenshot](./Images/generated-readme-file.png)
+
 ### Built with
 
 - ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)

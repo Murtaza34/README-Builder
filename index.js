@@ -11,7 +11,7 @@ const questions = [
     message: "Please enter your project title:",
     validate: function (input) {
       if (input === "") {
-        return "Project title cannot be empty.";
+        return "Project title cannot be blank";
       } else {
         return true;
       }
@@ -23,7 +23,7 @@ const questions = [
     message: "Please describe the purpose and functionality of your project:",
     validate: function (input) {
       if (input === "") {
-        return "Project description cannot be empty.";
+        return "Project description cannot be blank";
       } else {
         return true;
       }
@@ -69,7 +69,7 @@ const questions = [
     message: "Please enter the steps needed to install the application:",
     validate: function (input) {
       if (input === "") {
-        return "Installation steps cannot be empty.";
+        return "Installation steps would be appreciated";
       } else {
         return true;
       }
@@ -81,7 +81,7 @@ const questions = [
     message: "Please provide instructions on how to use this application:",
     validate: function (input) {
       if (input === "") {
-        return "Usage instruction cannot be empty.";
+        return "Usage instruction would be appreciated";
       } else {
         return true;
       }
@@ -103,13 +103,25 @@ const questions = [
   },
   {
     type: "input",
+    name: "name",
+    message: "Please enter your name, this will appear in the license section",
+    validate: function (input) {
+      if (input === "") {
+        return "Name cannot be blank";
+      } else {
+        return true;
+      }
+    },
+  },
+  {
+    type: "input",
     name: "contributors",
     message: "List any contributors to your project? Please enter their Github usernames:",
     default: "None",
   },
   {
     type: "input",
-    name: "test",
+    name: "tests",
     message: "Please provide information about any tests for your project:",
     default: "None",
   },
@@ -119,7 +131,7 @@ const questions = [
     message: "Please enter your Github username:",
     validate: function (input) {
       if (input === "") {
-        return "Github username cannot be empty.";
+        return "Github username cannot be blank";
       } else {
         return true;
       }
@@ -131,7 +143,7 @@ const questions = [
     message: "Please enter your email address:",
     validate: function (input) {
       if (input === "") {
-        return "Github username cannot be empty.";
+        return "Email address cannot be blank";
       } else {
         return true;
       }
@@ -141,11 +153,18 @@ const questions = [
 
 // function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile(fileName, generateMarkdown(data), function (err) {
-    if (err) {
-      return console.log(err);
-    }
-  });
+  fs.writeFile(fileName, data, (err) =>
+    err
+      ? console.error(err)
+      : console.log(
+          "\n",
+          "1) To view your generated README.md file, please navigate to the Generated file directory.",
+          "\n",
+          "\n",
+          "------------- Thank you for using this README generator! -------------",
+          "\n"
+        )
+  );
 }
 
 // function to initialize program
@@ -154,23 +173,24 @@ function init() {
     "\n",
     "-------------------- Hi, Welcome to README Generator --------------------",
     "\n",
-    "- Answer the questions below to generate your Professional README.md File",
+    "\n",
+    "1) Answer the questions below to generate your Professional README.md File.",
+    "\n",
+    "2) Please NOTE! Pressing enter will jump to the next question. To add new line use <br>.",
+    "\n",
+    "3) If you wish to exit, please press Ctrl + C.",
     "\n"
   );
   inquirer.prompt(questions).then((answers) => {
     writeToFile("./Generated-file/README.md", generateMarkdown({ ...answers }));
     console.log(
       "\n",
-      "------------- Your README has been Successfully Generated! -------------",
+      "------------- Your README.md has been Successfully Generated! -------------",
       "\n",
-      "- To view your generated README.md file, please navigate to the Generated file directory.",
-      "\n",
-      "Below are your results",
+      "----- Below are your results:",
       "\n",
       answers
-      
     );
-
   });
 }
 

@@ -1,6 +1,9 @@
 
 // --- Function to render Technologies and tools --- //
 function renderTechAndTools(builtWith) {
+  // To display in list use:
+  // ${answers.builtWith.map((tech) => `- ${renderTechAndTools(tech)}`).join('\n')}
+
   if (builtWith === "HTML") {
     return "![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)";
   } else if (builtWith === "CSS") {
@@ -44,7 +47,7 @@ function renderTechAndTools(builtWith) {
   }
 }
 
-// ----- function to render License Badges ---- //
+// ----- Function to render License Badges ---- //
 function renderLicenseBadge(license) {
   if (license === "MIT") {
     return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
@@ -63,7 +66,7 @@ function renderLicenseBadge(license) {
   }
 }
 
-// ----- function to render License links ---- //
+// ----- Function to render License links ---- //
 function renderLicenseLinks(license) {
   if (license === "MIT") {
     return "https://opensource.org/licenses/MIT";
@@ -80,45 +83,80 @@ function renderLicenseLinks(license) {
   } else if (license === "None") {
     return "";
   }
-}
+};
 
-// function renderLicenseSection(license) {
-//   if (license === "None") {
-//     return "";
-//   } else if (license) {
-//     return `License: ${license}`
-//   }
-// }
+// ----- Function to render License information ---- //
+function renderLicenseInfo(license) {
+  if (license === "MIT") {
+    return "Feel free to use, modify, and distribute this project as needed.";
+  } else if (license === "Apache 2.0") {
+    return "Feel free to use, modify, and distribute this project as needed.";
+  } else if (license === "GNU GPL v3") {
+    return "Users can use, modify, and distribute the project, including for commercial purposes, but any derivative works must also be licensed under the GPL v3.";
+  } else if (license === "BSD 3-Clause") {
+    return "Feel free to use, modify, and distribute this project as needed.";
+  } else if (license === "BSD 2-Clause") {
+    return "Feel free to use, modify, and distribute this project as needed.";
+  } else if (license === "The Unlicense") {
+    return "Feel free to use, modify, and distribute this project as needed.";
+  } else if (license === "None") {
+    return "Users have no rights to use, modify, or distribute this project without express permission from the copyright holder.";
+  }
+};
 
-// function to generate markdown for README
+
+
+// Function to generate markdown for README
 function generateMarkdown(answers) {
-   console.log("Answers:", answers);
-      
-
+   
   return `
   # ${answers.title}
 
-  ### Description
   ${answers.description}
   
-  ### Installation
+  ## Contents
+  
+  1. [Built with](#builtWith)
+  2. [Installation](#installation)
+  3. [Usage](#usage)
+  4. [License](#license)
+  5. [Tests](#tests)
+  6. [Questions](#questions)
+  
+  ## Built with
+  ${answers.builtWith.map((tech) => renderTechAndTools(tech)).join('\n')}
+  
+  ## Installation
   ${answers.installation}
   
-  ### Usage
+  ## Usage
   ${answers.usage}
   
-  ### License 
+  ## License 
+  
   ${renderLicenseBadge(answers.license)}
-  This project is licensed under the terms of the [${answers.license}](${renderLicenseLinks(answers.license)}).
 
-  ### Contributors
+  Copyright (c) 2023 **${answers.name}**
+
+  This project is licensed under the terms of [**${answers.license}**](${renderLicenseLinks(answers.license)}) License. ${renderLicenseInfo(answers.license)}
+
+  ## Contributors
   ${answers.contributors}
-
+  
+  ### **Interested?**
+  
   If you're interested in contributing, Simply fork the repo, make your changes, and submit a pull request. Remember to follow my coding standards and guidelines, and test your changes before submitting. Contact me if you need help. By contributing, you agree to follow my code of conduct and licensing terms in the LICENSE.md file.
-
+  
   Thanks for considering contributing to my project, and let's make it even better together!
+  
+  ## Tests
+  ${answers.tests}
+  
+  ## Questions
 
-
+  If you encounter any issues, please don't hesitate to contact me via **https://github.com/${answers.github}**, by creating an issue on the project's repository.
+  
+  Or feel free to email me at **${answers.email}**
 
 `;
 }
